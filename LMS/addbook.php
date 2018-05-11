@@ -17,8 +17,8 @@
       echo "<script> alert('Duplicate Book, Please check ISBN')</script>";
     }else{
       $conn->exec("INSERT INTO books Values ('$isbn', '$title', '$author', '$publisher', '$copyright_year', '$status')");
-        //echo "<script>alert('Sucessfully saved!')</script>";
-        //echo "<script>window.location= 'addbook.php'</script>";
+        echo "<script>alert('Sucessfully saved!')</script>";
+        echo "<script>window.location= 'addbook.php'</script>";
     }
   }
 ?>
