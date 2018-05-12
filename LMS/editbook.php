@@ -28,7 +28,7 @@ include_once("connection.php");
     }
     
     }
-        $xid = $_GET['xid'];
+        $xid = $_GET['isbn'];
         $sql = " SELECT * from books WHERE isbn = '$xid'";
         $stmt = $dbConn ->query($sql);
         $row =  $stmt ->fetch();
