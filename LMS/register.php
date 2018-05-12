@@ -8,13 +8,13 @@
     $password=$_POST['txtPassword'];
     $fname=$_POST['txtFname'];
     $lname=$_POST['txtLname'];
-    $rs=$conn->prepare("SELECT * FROM users WHERE username='$username'");
+    $rs=$dbConn->prepare("SELECT * FROM users WHERE username='$username'");
     $rs->execute();
     $rc=$rs->rowCount();
     if($rc>0 && $isbn!=""){
       echo "<script> alert('Duplicate Username! Please retype')</script>";
     }else{
-      $conn->exec("INSERT INTO users Values ('$username', '$password', '$fname', '$lname')");
+      $dbConn->exec("INSERT INTO users Values ('$username', '$password', '$fname', '$lname')");
         echo "<script>alert('Sucessfully Registered!')</script>";
         echo "<script>window.location= 'login.php'</script>";
     }

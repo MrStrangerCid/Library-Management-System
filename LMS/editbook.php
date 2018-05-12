@@ -12,7 +12,7 @@ include_once("connection.php");
     $copyright_year=$_POST['txtCYear'];
     $status=$_POST['txtStatus'];
     
-    $rsql=$conn->prepare("SELECT * FROM books WHERE isbn='$isbn'");
+    $rsql=$dbConn->prepare("SELECT * FROM books WHERE isbn='$isbn'");
     $rsql->execute();
     $rc=$rsql->rowCount();
     if($rc>0 && ($isbn!=$xid)){
@@ -21,7 +21,7 @@ include_once("connection.php");
       
     
     }else{
-      $rs=$conn->prepare("UPDATE books SET isbn='$isbn',title='$title',author='$author',publisher='$publisher',copyright_year='$copyright_year',status='$status'WHERE isbn='$xid'");
+      $rs=$dbConn->prepare("UPDATE books SET isbn='$isbn',title='$title',author='$author',publisher='$publisher',copyright_year='$copyright_year',status='$status'WHERE isbn='$xid'");
     $rs -> execute();
     echo "<script> alert('successfully updated')</script>";
     echo "<script> window.location='index.php'</script>";
