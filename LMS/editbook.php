@@ -3,13 +3,6 @@
 <head>
 <?php
 include_once("connection.php");
-
-    if(isset($_GET['xid'])){
-    $xid=$_GET['xid'];
-    $conn->exec("DELETE FROM books WHERE isbn='$xid'");
-    echo "<script> window.location='editbook.php'</script>";
-  }
-
   if(isset($_POST['Save'])){
     $xid=$_GET['txtIsbn'];
     $isbn=$_POST['txtIsbn'];
@@ -78,6 +71,34 @@ include_once("connection.php");
             </li>
             <li>
               <a href="editbook.php">View Books</a>
+            </li>
+          </ul>
+        </li>
+         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Transaction">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-book"></i>
+            <span class="nav-link-text">Transactions</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="collapseComponents">
+            <li>
+              <a href="#">Borrow Books</a>
+            </li>
+            <li>
+              <a href="#">Return Book</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Manage-User">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-book"></i>
+            <span class="nav-link-text">Manage User</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="collapseComponents">
+            <li>
+              <a href="#">Membership</a>
+            </li>
+            <li>
+              <a href="#">View Members</a>
             </li>
           </ul>
         </li>
