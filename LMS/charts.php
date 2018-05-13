@@ -14,40 +14,59 @@
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <a class="navbar-brand" href="index.html">Library Management System</a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
           <a class="nav-link" href="index.php">
-            <i class="fa fa-fw fa-dashboard"></i>
+            <i class="fa fa-fw fa-bank"></i>
             <span class="nav-link-text">Main Menu</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="charts.php">
-            <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text">Charts</span>
+          <a class="nav-link" href="tables.php">
+            <i class="fa fa-fw fa-eye"></i>
+            <span class="nav-link-text">View All Books</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-          <a class="nav-link" href="tables.php">
-            <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text">Books</span>
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-wrench"></i>
-            <span class="nav-link-text">Components</span>
+            <i class="fa fa-fw fa-cogs"></i>
+            <span class="nav-link-text">Manage Books</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseComponents">
             <li>
-              <a href="navbar.html">Navbar</a>
+              <a href="addbook.php"><i class="fa fa-fw fa-plus"></i> Add Book</a>
             </li>
             <li>
-              <a href="cards.html">Cards</a>
+              <a href="editbook.php"><i class="fa fa-fw fa-edit"></i> Edit Books</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Transaction">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#transactionComponents" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-suitcase"></i>
+            <span class="nav-link-text">Transactions</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="transactionComponents">
+            <li>
+              <a href="#"><i class="fa fa-fw fa-shopping-basket"></i> Borrow Books</a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-fw fa-tags"></i> Return Book</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Manage-User">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#userComponents" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-group"></i>
+            <span class="nav-link-text">Manage User</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="userComponents">
+            <li>
+              <a href="#"><i class="fa fa-fw fa-vcard-o"></i> Membership</a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-fw fa-sitemap"></i> View Members</a>
             </li>
           </ul>
         </li>
