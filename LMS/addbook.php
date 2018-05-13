@@ -29,7 +29,6 @@
   <link href="css/sb-admin.css" rel="stylesheet">
 </head>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-  <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <a class="navbar-brand" href="index.html">Library Management System</a>
     <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -84,7 +83,7 @@
               <a href="#"><i class="fa fa-fw fa-vcard-o"></i> Membership</a>
             </li>
             <li>
-              <a href="#"><i class="fa fa-fw fa-sitemap"></i> View Members</a>
+              <a href="members.php"><i class="fa fa-fw fa-sitemap"></i> View Members</a>
             </li>
           </ul>
         </li>

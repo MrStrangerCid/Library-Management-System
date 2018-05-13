@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <?php include_once("connection.php");?>
   <title>Library Management System</title>
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -8,10 +9,9 @@
   <link href="css/sb-admin.css" rel="stylesheet">
 </head>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-  <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.php">Library Management System</a>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
+    <a class="navbar-brand" href="index.html">Library Management System</a>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
           <a class="nav-link" href="index.php">
@@ -88,8 +88,61 @@
         <li class="breadcrumb-item">
           <a href="#">Menu</a>
         </li>
-        <li class="breadcrumb-item active">Index</li>
+        <li class="breadcrumb-item active">Members</li>
       </ol>
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> List of Members</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Member ID</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Gender</th>
+                  <th>Address</th>
+                  <th>Position</th>
+                  <th>Contact</th>
+                  <th>Status></th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <th>Member ID</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Gender</th>
+                  <th>Address</th>
+                  <th>Position</th>
+                  <th>Contact</th>
+                  <th>Status</th>
+                </tr>
+              </tfoot>
+              <tbody>
+                <?php
+                   $sql = "select * from members";
+                     foreach ($dbConn->query($sql) as $rec){
+                ?>
+                <tr>
+                  <td><?php echo $rec['memberID']?></td>
+                  <td><?php echo $rec['fname']?></td>
+                  <td><?php echo $rec['lname']?></td>
+                  <td><?php echo $rec['gender']?></td>
+                  <td><?php echo $rec['address']?></td>
+                  <td><?php echo $rec['position']?></td>
+                  <td><?php echo $rec['contact']?></td>
+                  <td><?php echo $rec['status']?></td>
+                </tr>
+                <?php
+                    }
+                ?>
+              </tbody>
+            </table>
+          </div>
+      </div>
+    </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">

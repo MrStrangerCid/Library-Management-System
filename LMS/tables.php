@@ -63,7 +63,7 @@
               <a href="#"><i class="fa fa-fw fa-vcard-o"></i> Membership</a>
             </li>
             <li>
-              <a href="#"><i class="fa fa-fw fa-sitemap"></i> View Members</a>
+              <a href="members.php"><i class="fa fa-fw fa-sitemap"></i> View Members</a>
             </li>
           </ul>
         </li>
