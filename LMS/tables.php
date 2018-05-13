@@ -98,6 +98,7 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
+                  <th>Book ID</th>
                   <th>ISBN</th>
                   <th>Title</th>
                   <th>Author</th>
@@ -108,6 +109,7 @@
               </thead>
               <tfoot>
                 <tr>
+                  <th>Book ID</th>
                   <th>ISBN</th>
                   <th>Title</th>
                   <th>Author</th>
@@ -122,6 +124,7 @@
                      foreach ($dbConn->query($sql) as $rec){
                 ?>
                 <tr>
+                  <td><?php echo $rec['bookID']?></td>
                   <td><?php echo $rec['isbn']?></td>
                   <td><?php echo $rec['title']?></td>
                   <td><?php echo $rec['author']?></td>

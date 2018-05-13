@@ -3,6 +3,7 @@
 <head>
 <?php include "connection.php";
   if(isset($_POST['Save'])){
+    $bookID=$_POST['txtbookID'];
     $isbn=$_POST['txtIsbn'];
     $title=$_POST['txtTitle'];
     $author=$_POST['txtAuthor'];
@@ -10,13 +11,13 @@
     $copyright_year=$_POST['txtCYear'];
     $status=$_POST['txtStatus'];
     
-    $rs=$conn->prepare("SELECT * FROM books WHERE isbn='$isbn'");
+    $rs=$dbConn->prepare("SELECT * FROM books WHERE bookID='$bookID'");
     $rs->execute();
     $rc=$rs->rowCount();
     if($rc>0 && $isbn!=""){
       echo "<script> alert('Duplicate Book, Please check ISBN')</script>";
     }else{
-      $dbConn->exec("INSERT INTO books Values ('$isbn', '$title', '$author', '$publisher', '$copyright_year', '$status')");
+      $dbConn->exec("INSERT INTO books Values ('bookID', $isbn', '$title', '$author', '$publisher', '$copyright_year', '$status')");
         echo "<script>alert('Sucessfully saved!')</script>";
         echo "<script>window.location= 'addbook.php'</script>";
     }
@@ -116,33 +117,39 @@
         <form method = "POST">
         <div class="card-body">
           <div class="form-group row">
+            <label class="col-2 col-form-label">Book ID</label>
+              <div class="col-3">
+                <input class="form-control" type="text" placeholder="Book ID" name="txtbookID" required autofocus>
+              </div>
+          </div>
+          <div class="form-group row">
             <label class="col-2 col-form-label">ISBN</label>
               <div class="col-3">
-                <input class="form-control" type="text" placeholder="ISBN" name="txtIsbn">
+                <input class="form-control" type="text" placeholder="ISBN" name="txtIsbn" required>
               </div>
           </div>
           <div class="form-group row">
             <label class="col-2 col-form-label">Title</label>
               <div class="col-8">
-                <input class="form-control" type="text" placeholder="ex. Introduction to LMS" name="txtTitle">
+                <input class="form-control" type="text" placeholder="ex. Introduction to LMS" name="txtTitle" required>
               </div>
           </div>
           <div class="form-group row">
             <label class="col-2 col-form-label">Author</label>
               <div class="col-8">
-                <input class="form-control" type="text" placeholder="ex. John Doe" name="txtAuthor">
+                <input class="form-control" type="text" placeholder="ex. John Doe" name="txtAuthor" required>
               </div>
           </div>
           <div class="form-group row">
             <label class="col-2 col-form-label">Publisher</label>
               <div class="col-8">
-                <input class="form-control" type="text" placeholder="ex. LMS Publishing Corp" name="txtPublisher">
+                <input class="form-control" type="text" placeholder="ex. LMS Publishing Corp" name="txtPublisher" required>
               </div>
           </div>
           <div class="form-group row">
             <label class="col-2 col-form-label">Copyright Year</label>
               <div class="col-2">
-                <input class="form-control" type="text" placeholder="ex. 2000" name="txtCYear">
+                <select class="form-control" name="txtCYear" id="year"></select>
               </div>
           </div>
           <div class="form-group row">
@@ -201,6 +208,15 @@
     <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
     <script src="js/sb-admin.min.js"></script>
     <script src="js/sb-admin-datatables.min.js"></script>
+    <script type="text/javascript">
+      var year = 1900;
+      var till = 2018;
+      var options = "";
+        for(var y=year; y<=till; y++){
+          options += "<option>"+ y +"</option>";
+          }
+          document.getElementById("year").innerHTML = options;
+    </script>
   </div>
 </body>
 </html>
