@@ -3,7 +3,6 @@
 <head>
 <?php include "connection.php";
   if(isset($_POST['Save'])){
-    $bookID=$_POST['txtbookID'];
     $isbn=$_POST['txtIsbn'];
     $title=$_POST['txtTitle'];
     $author=$_POST['txtAuthor'];
@@ -11,13 +10,13 @@
     $copyright_year=$_POST['txtCYear'];
     $status=$_POST['txtStatus'];
     
-    $rs=$dbConn->prepare("SELECT * FROM books WHERE bookID='$bookID'");
+    $rs=$dbConn->prepare("SELECT * FROM books WHERE isbn='$isbn'");
     $rs->execute();
     $rc=$rs->rowCount();
     if($rc>0 && $isbn!=""){
       echo "<script> alert('Duplicate Book, Please check ISBN')</script>";
     }else{
-      $dbConn->exec("INSERT INTO books Values ('bookID', $isbn', '$title', '$author', '$publisher', '$copyright_year', '$status')");
+      $dbConn->exec("INSERT INTO books Values ('$bookID', '$isbn', '$title', '$author', '$publisher', '$copyright_year', '$status')");
         echo "<script>alert('Sucessfully saved!')</script>";
         echo "<script>window.location= 'addbook.php'</script>";
     }
@@ -117,15 +116,9 @@
         <form method = "POST">
         <div class="card-body">
           <div class="form-group row">
-            <label class="col-2 col-form-label">Book ID</label>
-              <div class="col-3">
-                <input class="form-control" type="text" placeholder="Book ID" name="txtbookID" required autofocus>
-              </div>
-          </div>
-          <div class="form-group row">
             <label class="col-2 col-form-label">ISBN</label>
               <div class="col-3">
-                <input class="form-control" type="text" placeholder="ISBN" name="txtIsbn" required>
+                <input class="form-control" type="number" placeholder="ISBN" name="txtIsbn" required>
               </div>
           </div>
           <div class="form-group row">
