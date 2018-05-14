@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2018 at 05:28 PM
+-- Generation Time: May 14, 2018 at 07:25 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.3
 
@@ -29,11 +29,13 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `books` (
+  `bookID` int(15) NOT NULL,
   `isbn` int(20) NOT NULL,
   `title` char(30) NOT NULL,
   `author` char(30) NOT NULL,
   `publisher` varchar(50) NOT NULL,
   `copyright_year` int(5) NOT NULL,
+  `copy` int(5) NOT NULL,
   `status` char(7) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='This will be the database of books in the system';
 
@@ -41,8 +43,13 @@ CREATE TABLE `books` (
 -- Dumping data for table `books`
 --
 
-INSERT INTO `books` (`isbn`, `title`, `author`, `publisher`, `copyright_year`, `status`) VALUES
-(2233, 'Introduction to PHP', 'Emman Trinidad', 'LEX Publishing Corp.', 2002, 'Damage');
+INSERT INTO `books` (`bookID`, `isbn`, `title`, `author`, `publisher`, `copyright_year`, `copy`, `status`) VALUES
+(1, 213, 'Introduction to PHP', '3131', '2313123', 0, 0, 'New'),
+(2, 213, '23131', '3131', '2313123', 1900, 0, 'New'),
+(3, 213, '23131', '3131', '2313123', 1900, 0, 'New'),
+(4, 213, '23131', '3131', '2313123', 1900, 0, 'New'),
+(5, 2147483647, 'Light Up my Way', 'Juan Luna', 'Maharlika Publishing Corp', 1919, 0, 'Old'),
+(6, 111111, 'Introduction to PHP', 'Emman Trinidad', 'Maharlika Publishing Corp', 1918, 0, 'Old');
 
 -- --------------------------------------------------------
 
@@ -65,13 +72,12 @@ CREATE TABLE `borrowbooks` (
 --
 
 CREATE TABLE `members` (
-  `member_id` smallint(15) NOT NULL,
+  `memberID` smallint(15) NOT NULL,
   `fname` text NOT NULL,
   `lname` text NOT NULL,
   `gender` tinytext NOT NULL,
   `address` tinytext NOT NULL,
   `position` tinytext NOT NULL,
-  `year` tinyint(1) NOT NULL,
   `contact` smallint(11) NOT NULL,
   `status` tinytext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='This will be the database of members in the system';
@@ -102,10 +108,38 @@ INSERT INTO `users` (`username`, `password`, `fname`, `lname`) VALUES
 --
 
 --
+-- Indexes for table `books`
+--
+ALTER TABLE `books`
+  ADD PRIMARY KEY (`bookID`);
+
+--
+-- Indexes for table `members`
+--
+ALTER TABLE `members`
+  ADD PRIMARY KEY (`memberID`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`username`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `books`
+--
+ALTER TABLE `books`
+  MODIFY `bookID` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `members`
+--
+ALTER TABLE `members`
+  MODIFY `memberID` smallint(15) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
