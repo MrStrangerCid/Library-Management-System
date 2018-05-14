@@ -1,32 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<?php
-include_once("connection.php");
-  if(isset($_POST['Save'])){
-    $xid=$_GET['txtIsbn'];
-    $isbn=$_POST['txtIsbn'];
-    $title=$_POST['txtTitle'];
-    $author=$_POST['txtAuthor'];
-    $publisher=$_POST['txtPublisher'];
-    $copyright_year=$_POST['txtCYear'];
-    $status=$_POST['txtStatus'];
-    
-    $rsql=$dbConn->prepare("SELECT * FROM books WHERE isbn='$isbn'");
-    $rsql->execute();
-    $rc=$rsql->rowCount();
-    if($rc>0 && ($isbn!=$xid)){
-    
-      echo "<script> alert('Duplicate Book, please check ISBN and try again')</script>";
-      
-    }else{
-      $rs=$dbConn->prepare("UPDATE books SET isbn='$isbn',title='$title',author='$author',publisher='$publisher',copyright_year='$copyright_year',status='$status'WHERE isbn='$xid'");
-    $rs -> execute();
-    echo "<script> alert('successfully updated')</script>";
-    echo "<script> window.location='index.php'</script>";
-    }
-    }
-?>
   <title>Library Management System</title>
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -123,6 +97,7 @@ include_once("connection.php");
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
+                  <th>Book ID</th>
                   <th>ISBN</th>
                   <th>Title</th>
                   <th>Author</th>
@@ -134,6 +109,7 @@ include_once("connection.php");
               </thead>
               <tfoot>
                 <tr>
+                  <th>Book ID</th>
                   <th>ISBN</th>
                   <th>Title</th>
                   <th>Author</th>
@@ -144,56 +120,36 @@ include_once("connection.php");
                 </tr>
               </tfoot>
               <tbody>
-                <?php
-                   $sql = "select * from books";
-                     foreach ($dbConn->query($sql) as $rec){
+                <?php include_once('connection.php');
+
+                  $database = new Connection();
+                  $db = $database->open();
+                  try{  
+                    $sql = 'Select * from books';
+                     foreach ($db->query($sql) as $rec){
                   ?>
                 <tr>
+                  <td><?php echo $rec['bookID']?></td>
                   <td><?php echo $rec['isbn']?></td>
                   <td><?php echo $rec['title']?></td>
                   <td><?php echo $rec['author']?></td>
                   <td><?php echo $rec['publisher']?></td>
                   <td><?php echo $rec['copyright_year']?></td>
                   <td><?php echo $rec['status']?></td>
-                  <td><a href="#edit<?php echo $rec['bookID']; ?>" data-toggle="modal" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> Edit</a></td>
+                  <td><a href="#edit_<?php echo $rec['bookID']; ?>" class="btn btn-success" data-toggle="modal"><span class="glyphicon glyphicon-edit"></span> Edit</a></td>
+                  <?php include('edit_modal.php'); ?>
                 </tr>
                 <?php
                     }
-                ?>
+                  }
+                 catch(PDOException $e){
+                  echo "There is some problem in connection: " . $e->getMessage();
+                  }
+                  $database->close();
+                  ?>
               </tbody>
             </table>
             <br>
-             <div class="container">
-                <div class="modal fade" id="edit<?php echo $rec['bookID']; ?>" role="dialog">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h4 class="modal-title">Edit Book</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      </div>
-                      <form method="POST" action="editbook.php">
-                        <div class="modal-body">
-                          ISBN: <input type="text" class="form-control" name="txtIsbn" aria-describedby="ISBN">
-                          Title: <input type="text" class="form-control" name="txtTitle" aria-describedby="Title">
-                          Author: <input type="text" class="form-control" name="txtAuthor" aria-describedby="Author">
-                          Publisher: <input type="text" class="form-control" name="txtPublisher" aria-describedby="Publisher">
-                          Copyright Year: <input type="text" class="form-control" name="txtCYear" aria-describedby="Copyright Year">
-                          Status: <select class="form-control" name="txtStatus">
-                                    <option name="New">New</option>
-                                    <option name="Old">Old</option>
-                                    <option name="Damage">Damage</option>
-                                    <option name="Archive">Archive</option>
-                                    <option name="Lost">Lost</option>
-                                  </select>
-                          <div class="modal-footer">
-                            <td><input type="submit" class="btn btn-default" name="Save" value="Save"></td>
-                          </div>
-                        </div>
-                      </form>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
       </div>
@@ -233,7 +189,7 @@ include_once("connection.php");
     <script src="vendor/datatables/jquery.dataTables.js"></script>
     <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
     <script src="js/sb-admin.min.js"></script>
-    <script src="js/sb-admin-datatables.min.js"></script>
+    <script src="js/sb-admin-datatables.min.js"></script>   
   </div>
 </body>
 </html>

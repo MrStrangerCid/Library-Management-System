@@ -1,19 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <?php
-  include('connection.php');
-    $isbn=$_POST['txtIsbn'];
-    $title=$_POST['txtTitle'];
-    $author=$_POST['txtAuthor'];
-    $publisher=$_POST['txtPublisher'];
-    $copyright_year=$_POST['txtCYear'];
-    $status=$_POST['txtStatus'];
-  
-    mysqli_query($dbConn,"insert into books (txtIsbn, txtTitle, txtAuthor, txtPublisher, txtCYear, txtStatus) values ('$isbn', '$title', '$author', '$publisher', '$copyright_year', '$status')");
-    header('location:editbook.php');
-
-  ?>
   <title>Library Management System</title>
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">

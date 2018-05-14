@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <?php include_once("connection.php");?>
   <title>Library Management System</title>
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -104,6 +103,7 @@
                   <th>Author</th>
                   <th>Publisher</th>
                   <th>Copyright Year</th>
+                  <th>Copies</th>
                   <th>Status</th>
                 </tr>
               </thead>
@@ -115,14 +115,20 @@
                   <th>Author</th>
                   <th>Publisher</th>
                   <th>Copyright Year</th>
+                  <th>Copies</th>
                   <th>Status</th>
                 </tr>
               </tfoot>
               <tbody>
                 <?php
-                   $sql = "select * from books";
-                     foreach ($dbConn->query($sql) as $rec){
-                ?>
+                  include_once('connection.php');
+
+                  $database = new Connection();
+                  $db = $database->open();
+                try{  
+                  $sql = 'SELECT * FROM books';
+                    foreach ($db->query($sql) as $rec) {
+                  ?>
                 <tr>
                   <td><?php echo $rec['bookID']?></td>
                   <td><?php echo $rec['isbn']?></td>
@@ -130,10 +136,16 @@
                   <td><?php echo $rec['author']?></td>
                   <td><?php echo $rec['publisher']?></td>
                   <td><?php echo $rec['copyright_year']?></td>
+                  <td><?php echo $rec['copy']?></td>
                   <td><?php echo $rec['status']?></td>
                 </tr>
                 <?php
                     }
+                  }
+                  catch(PDOException $e){
+                    echo "There is some problem in connection: " . $e->getMessage();
+                }
+                $database->close();
                 ?>
               </tbody>
             </table>
