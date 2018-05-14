@@ -19,19 +19,13 @@ include_once("connection.php");
     
       echo "<script> alert('Duplicate Book, please check ISBN and try again')</script>";
       
-    
     }else{
       $rs=$dbConn->prepare("UPDATE books SET isbn='$isbn',title='$title',author='$author',publisher='$publisher',copyright_year='$copyright_year',status='$status'WHERE isbn='$xid'");
     $rs -> execute();
     echo "<script> alert('successfully updated')</script>";
     echo "<script> window.location='index.php'</script>";
     }
-    
     }
-        $xid = $_GET['isbn'];
-        $sql = " SELECT * from books WHERE isbn = '$xid'";
-        $stmt = $dbConn ->query($sql);
-        $row =  $stmt ->fetch();
 ?>
   <title>Library Management System</title>
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -153,7 +147,7 @@ include_once("connection.php");
                 <?php
                    $sql = "select * from books";
                      foreach ($dbConn->query($sql) as $rec){
-                ?>
+                  ?>
                 <tr>
                   <td><?php echo $rec['isbn']?></td>
                   <td><?php echo $rec['title']?></td>
@@ -161,7 +155,7 @@ include_once("connection.php");
                   <td><?php echo $rec['publisher']?></td>
                   <td><?php echo $rec['copyright_year']?></td>
                   <td><?php echo $rec['status']?></td>
-                  <td><button type="button" data-toggle="modal" data-target="#EditBookModal">Edit</a></td>
+                  <td><a href="#edit<?php echo $rec['bookID']; ?>" data-toggle="modal" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> Edit</a></td>
                 </tr>
                 <?php
                     }
@@ -169,9 +163,8 @@ include_once("connection.php");
               </tbody>
             </table>
             <br>
-            <!--Add Books Modal-->
              <div class="container">
-                <div class="modal fade" id="EditBookModal" role="dialog">
+                <div class="modal fade" id="edit<?php echo $rec['bookID']; ?>" role="dialog">
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
@@ -180,12 +173,12 @@ include_once("connection.php");
                       </div>
                       <form method="POST" action="editbook.php">
                         <div class="modal-body">
-                          ISBN: <input type="text" class="form-control" name="txtIsbn" aria-describedby="ISBN" value="<?php echo $row['isbn'];?>">
-                          Title: <input type="text" class="form-control" name="txtTitle" aria-describedby="Title" value="<?php echo $row['title'];?>">
-                          Author: <input type="text" class="form-control" name="txtAuthor" aria-describedby="Author" value="<?php echo $row['author'];?>">
-                          Publisher: <input type="text" class="form-control" name="txtPublisher" aria-describedby="Publisher" value="<?php echo $row['publisher'];?>"><br/>
-                          Copyright Year: <input type="text" class="form-control" name="txtCYear" aria-describedby="Copyright Year" value="<?php echo $row['copyright_year'];?>">
-                          Status: <select class="form-control" name="txtStatus" value="<?php echo $row['status'];?>">
+                          ISBN: <input type="text" class="form-control" name="txtIsbn" aria-describedby="ISBN">
+                          Title: <input type="text" class="form-control" name="txtTitle" aria-describedby="Title">
+                          Author: <input type="text" class="form-control" name="txtAuthor" aria-describedby="Author">
+                          Publisher: <input type="text" class="form-control" name="txtPublisher" aria-describedby="Publisher">
+                          Copyright Year: <input type="text" class="form-control" name="txtCYear" aria-describedby="Copyright Year">
+                          Status: <select class="form-control" name="txtStatus">
                                     <option name="New">New</option>
                                     <option name="Old">Old</option>
                                     <option name="Damage">Damage</option>
@@ -205,8 +198,6 @@ include_once("connection.php");
         <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
       </div>
     </div>
-    <!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">

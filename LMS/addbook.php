@@ -1,27 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<?php include "connection.php";
-  if(isset($_POST['Save'])){
+  <?php
+  include('connection.php');
     $isbn=$_POST['txtIsbn'];
     $title=$_POST['txtTitle'];
     $author=$_POST['txtAuthor'];
     $publisher=$_POST['txtPublisher'];
     $copyright_year=$_POST['txtCYear'];
     $status=$_POST['txtStatus'];
-    
-    $rs=$dbConn->prepare("SELECT * FROM books WHERE isbn='$isbn'");
-    $rs->execute();
-    $rc=$rs->rowCount();
-    if($rc>0 && $isbn!=""){
-      echo "<script> alert('Duplicate Book, Please check ISBN')</script>";
-    }else{
-      $dbConn->exec("INSERT INTO books Values ('$bookID', '$isbn', '$title', '$author', '$publisher', '$copyright_year', '$status')");
-        echo "<script>alert('Sucessfully saved!')</script>";
-        echo "<script>window.location= 'addbook.php'</script>";
-    }
-  }
-?>
+  
+    mysqli_query($dbConn,"insert into books (txtIsbn, txtTitle, txtAuthor, txtPublisher, txtCYear, txtStatus) values ('$isbn', '$title', '$author', '$publisher', '$copyright_year', '$status')");
+    header('location:editbook.php');
+
+  ?>
   <title>Library Management System</title>
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
