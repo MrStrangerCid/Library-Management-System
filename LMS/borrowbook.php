@@ -8,10 +8,9 @@
   <link href="css/sb-admin.css" rel="stylesheet">
 </head>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-  <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.php">Library Management System</a>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
+    <a class="navbar-brand" href="index.html">Library Management System</a>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
           <a class="nav-link" href="index.php">
@@ -86,10 +85,63 @@
     <div class="container-fluid">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="#">Menu</a>
+          <a>Transaction</a>
         </li>
-        <li class="breadcrumb-item active">Index</li>
+        <li class="breadcrumb-item active">Borrow Book</li>
       </ol>
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-shopping-basket"></i> Borrow Book</div>
+        <form method = "POST">
+        <div class="card-body">
+          <div class="form-group row">
+            <label class="col-2 col-form-label">Book ID</label>
+              <div class="col-2">
+                <input class="form-control" type="number" placeholder="ID" name="txtbookID" required>
+              </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-2 col-form-label">Title</label>
+              <div class="col-8">
+                <input class="form-control" type="text" placeholder="ex. Introduction to LMS" name="txtTitle" required>
+              </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-2 col-form-label">Author</label>
+              <div class="col-8">
+                <input class="form-control" type="text" placeholder="ex. John Doe" name="txtAuthor" required>
+              </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-2 col-form-label">Publisher</label>
+              <div class="col-8">
+                <input class="form-control" type="text" placeholder="ex. LMS Publishing Corp" name="txtPublisher" required>
+              </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-2 col-form-label">Copyright Year</label>
+              <div class="col-2">
+                <select class="form-control" name="txtCYear" id="year"></select>
+              </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-2 col-form-label">Status</label>
+              <div class="col-2">
+                <select class="form-control" name="txtStatus">
+                    <option name="New">New</option>
+                    <option name="Old">Old</option>
+                    <option name="Damage">Damage</option>
+                    <option name="Archive">Archive</option>
+                    <option name="Lost">Lost</option>
+                </select>
+              </div>
+          </div>
+            <input type="submit" class="btn btn-success btn-block" name="Save" value="Save">
+        </div>
+      </div>
+    </form>
+    </div>
+  </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
@@ -128,6 +180,15 @@
     <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
     <script src="js/sb-admin.min.js"></script>
     <script src="js/sb-admin-datatables.min.js"></script>
+    <script type="text/javascript">
+      var year = 1900;
+      var till = 2018;
+      var options = "";
+        for(var y=year; y<=till; y++){
+          options += "<option>"+ y +"</option>";
+          }
+          document.getElementById("year").innerHTML = options;
+    </script>
   </div>
 </body>
 </html>
