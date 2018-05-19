@@ -3,31 +3,31 @@
 	include_once('connection.php');
 
 	if(isset($_POST['edit'])){
-		$database = new Connection();
-		$db = $database->open();
 		try{
+			$database = new Connection();
+			$db = $database->open();
 			$bookID = $_GET['bookID'];
 			$isbn=$_POST['txtIsbn'];
-    		$title=$_POST['txtTitle'];
-    		$author=$_POST['txtAuthor'];
-    		$publisher=$_POST['txtPublisher'];
-    		$copyright_year=$_POST['txtCYear'];
-    		$status=$_POST['txtStatus'];
+    			$title=$_POST['txtTitle'];
+    			$author=$_POST['txtAuthor'];
+    			$publisher=$_POST['txtPublisher'];
+    			$copyright_year=$_POST['txtCYear'];
+    			$status=$_POST['txtStatus'];
 
-			$sql = ("UPDATE books SET isbn='$isbn', title='$title', author='$author', publisher='$publisher', copyright_year='$copyright_year', status='$status' WHERE bookID='$bookID'");
-			
-			$_SESSION['message'] = ( $db->exec($sql) ) ? 'Member updated successfully' : 'Something went wrong. Cannot update member';
+			$sql = "UPDATE books SET isbn='$isbn', title='$title', author='$author', publisher='$publisher', copyright_year='$copyright_year', status='$status' WHERE bookID='$bookID'";
+				
+			$affectedrows  = $db->exec($sql);
+ 
+  			if(isset($affectedrows)){
+       				echo "Record has been successfully updated";
+				}        
+				
 
-		}
-		catch(PDOException $e){
-			$_SESSION['message'] = $e->getMessage();
-		}
-
-		$database->close();
-	}
-	else{
-		$_SESSION['message'] = 'Fill up edit form first';
-	}
-
+			}
+		catch (PDOException $e){
+ 			echo "There is some problem in connection: " . $e->getMessage();
+ 
+			}
+ 
 	header('location: editbook.php');
 ?>
