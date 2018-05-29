@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.8.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 14, 2018 at 07:25 AM
--- Server version: 10.1.31-MariaDB
--- PHP Version: 7.2.3
+-- Generation Time: May 29, 2018 at 10:01 PM
+-- Server version: 10.1.32-MariaDB
+-- PHP Version: 7.2.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -101,6 +101,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`username`, `password`, `fname`, `lname`) VALUES
 ('admin', 'admin', 'CJ', 'Pastor'),
+('cjcjcj', 'hahaha', 'CJ', 'Pastor'),
 ('emman', 'admin', 'Emmanuel', 'Trinidad');
 
 --
