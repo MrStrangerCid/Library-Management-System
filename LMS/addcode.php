@@ -1,28 +1,21 @@
-<?php
-	session_start();
-	include_once('connection.php');
-
-	if(isset($_POST['add'])){
-		$database = new Connection();
-		$db = $database->open();
-		try{
-			//make use of prepared statement to prevent sql injection
-			$stmt = $db->prepare("INSERT INTO books (isbn, title, author, publisher, copyright_year, status) Values ('$isbn', '$title', '$author', '$publisher', '$copyright_year', '$status')");
-			//if-else statement in executing our prepared statement
-			$_SESSION['message'] = ( $stmt->execute(array(':firstname' => $_POST['firstname'] , ':lastname' => $_POST['lastname'] , ':address' => $_POST['address'])) ) ? 'Member added successfully' : 'Something went wrong. Cannot add member';	
-	    
-		}
-		catch(PDOException $e){
-			$_SESSION['message'] = $e->getMessage();
-		}
-
-		$database->close();
-	}
-
-	else{
-		$_SESSION['message'] = 'Fill up add form first';
-	}
-
-	header('location: index.php');
-	
+<?php include "connection.php";
+  if(isset($_POST['Save'])){
+    $isbn=$_POST['txtIsbn'];
+    $title=$_POST['txtTitle'];
+    $author=$_POST['txtAuthor'];
+    $publisher=$_POST['txtPublisher'];
+    $copyright_year=$_POST['txtCYear'];
+    $status=$_POST['txtStatus'];
+    
+    $rs=$conn->prepare("SELECT * FROM books WHERE isbn='$isbn'");
+    $rs->execute();
+    $rc=$rs->rowCount();
+    if($rc>0 && $isbn!=""){
+      echo "<script> alert('Duplicate Book)</script>";
+    }else{
+      $conn->exec("INSERT INTO books (isbn, title, author, publisher, copyright_year, status) Values ('$isbn', '$title', '$author', '$publisher', '$copyright_year', '$status')");
+        echo "<script>alert('Sucessfully saved!')</script>";
+        echo "<script>window.location= 'tables.php'</script>";
+    }
+  }
 ?>

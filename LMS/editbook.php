@@ -120,14 +120,11 @@
                 </tr>
               </tfoot>
               <tbody>
-                <?php include_once('connection.php');
-
-                  $database = new Connection();
-                  $db = $database->open();
-                  try{  
-                    $sql = 'Select * from books';
-                     foreach ($db->query($sql) as $rec){
-                  ?>
+                <?php
+                  include_once('connection.php');
+                  $sql = "select * from books";
+                  foreach ($conn->query($sql) as $rec){
+                    ?>
                 <tr>
                   <td><?php echo $rec['bookID']?></td>
                   <td><?php echo $rec['isbn']?></td>
@@ -136,17 +133,11 @@
                   <td><?php echo $rec['publisher']?></td>
                   <td><?php echo $rec['copyright_year']?></td>
                   <td><?php echo $rec['status']?></td>
-                  <td><a href="#edit_<?php echo $rec['bookID']; ?>" class="btn btn-success" data-toggle="modal"><span class="glyphicon glyphicon-edit"></span> Edit</a></td>
-                  <?php include('edit_modal.php'); ?>
+                  <td><a href = "editwindow.php?xid=<?php echo $rec['bookID'];?>">Edit</a></td>
                 </tr>
                 <?php
-                    }
-                  }
-                 catch(PDOException $e){
-                  echo "There is some problem in connection: " . $e->getMessage();
-                  }
-                  $database->close();
-                  ?>
+              }
+              ?>
               </tbody>
             </table>
             <br>

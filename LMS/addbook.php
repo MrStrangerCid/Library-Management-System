@@ -92,7 +92,7 @@
       <div class="card mb-3">
         <div class="card-header">
           <i class="fa fa-plus"></i> Add Book</div>
-        <form method = "POST">
+        <form method = "POST" action = "addcode.php">
         <div class="card-body">
           <div class="form-group row">
             <label class="col-2 col-form-label">ISBN</label>

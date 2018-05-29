@@ -45,7 +45,7 @@
           </a>
           <ul class="sidenav-second-level collapse" id="transactionComponents">
             <li>
-              <a href="borrowbook.php"><i class="fa fa-fw fa-shopping-basket"></i> Borrow Books</a>
+              <a href="#"><i class="fa fa-fw fa-shopping-basket"></i> Borrow Books</a>
             </li>
             <li>
               <a href="#"><i class="fa fa-fw fa-tags"></i> Return Book</a>
@@ -85,63 +85,95 @@
     <div class="container-fluid">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="#">Menu</a>
+          <a>Manage Book</a>
         </li>
-        <li class="breadcrumb-item active">All Books</li>
+        <li class="breadcrumb-item active">Edit Book</li>
       </ol>
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> List of Books</div>
+          <i class="fa fa-plus"></i> Edit Book</div>
+        <form method = "POST">
+          <?php
+          include_once('connection.php');
+          if(isset($_POST['Save'])){
+            $xid =$_GET['xid'];
+            $bookID = $_POST['bookID'];
+            $isbn=$_POST['txtIsbn'];
+            $title=$_POST['txtTitle'];
+            $author=$_POST['txtAuthor'];
+            $publisher=$_POST['txtPublisher'];
+            $copyright_year=$_POST['txtCYear'];
+            $status=$_POST['txtStatus'];
+
+            $rsql=$conn->prepare("SELECT * FROM books WHERE bookID='$bookID'");
+            $rsql->execute();
+            $rc=$rsql->rowCount();
+            if($rc>0 && ($id!=$xid)){
+              echo "<script> alert('Please retype')</script>";
+            }else{
+              $rs=$conn->prepare("UPDATE books SET isbn='$isbn', title='$title', author='$author', publisher='$publisher', copyright_year='$copyright_year', status='$status' WHERE bookID='$bookID'");
+              $rs -> execute();
+              echo "<script> alert('Successfully updated')</script>";
+              echo "<script> window.location='editbook.php'</script>";
+            }
+          }
+          $xid = $_GET['xid'];
+          $sql = " SELECT * from books WHERE bookID = '$xid'";
+          $stmt = $conn ->query($sql);
+          $row =  $stmt ->fetch();
+          ?>
         <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-              <thead>
-                <tr>
-                  <th>Book ID</th>
-                  <th>ISBN</th>
-                  <th>Title</th>
-                  <th>Author</th>
-                  <th>Publisher</th>
-                  <th>Copyright Year</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tfoot>
-                <tr>
-                  <th>Book ID</th>
-                  <th>ISBN</th>
-                  <th>Title</th>
-                  <th>Author</th>
-                  <th>Publisher</th>
-                  <th>Copyright Year</th>
-                  <th>Status</th>
-                </tr>
-              </tfoot>
-              <tbody>
-                <?php
-                  include_once('connection.php');
-                  $sql = "select * from books";
-                  foreach ($conn->query($sql) as $rec){
-                    ?>
-                <tr>
-                  <td><?php echo $rec['bookID']?></td>
-                  <td><?php echo $rec['isbn']?></td>
-                  <td><?php echo $rec['title']?></td>
-                  <td><?php echo $rec['author']?></td>
-                  <td><?php echo $rec['publisher']?></td>
-                  <td><?php echo $rec['copyright_year']?></td>
-                  <td><?php echo $rec['status']?></td>
-                </tr>
-                <?php
-              }
-              ?>
-              </tbody>
-            </table>
+          <div class="form-group row">
+            <label class="col-2 col-form-label">ISBN</label>
+              <div class="col-3">
+                <input class="form-control" type="number" name="txtIsbn" value="<?php echo $row['isbn']?>" required>
+              </div>
           </div>
+          <div class="form-group row">
+            <label class="col-2 col-form-label">Title</label>
+              <div class="col-8">
+                <input class="form-control" type="text" name="txtTitle" value="<?php echo $row['title']?>" required>
+              </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-2 col-form-label">Author</label>
+              <div class="col-8">
+                <input class="form-control" type="text" name="txtAuthor" value="<?php echo $row['author']?>" required>
+              </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-2 col-form-label">Publisher</label>
+              <div class="col-8">
+                <input class="form-control" type="text" name="txtPublisher" value="<?php echo $row['publisher']?>" required>
+              </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-2 col-form-label">Copyright Year</label>
+              <div class="col-2">
+                <select class="form-control" name="txtCYear" id="year" value="<?php echo $row['copyright_year']?>"></select>
+              </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-2 col-form-label">Status</label>
+              <div class="col-2">
+                <select class="form-control" name="txtStatus" value="<?php echo $row['status']?>">
+                    <option name="New">New</option>
+                    <option name="Old">Old</option>
+                    <option name="Damage">Damage</option>
+                    <option name="Archive">Archive</option>
+                    <option name="Lost">Lost</option>
+                </select>
+              </div>
+          </div>
+            <td><input type="submit" class="btn btn-success btn-block" name="Save" value="Save"></td>
+        </div>
       </div>
+      <?
+    }
+      ?>
+    </form>
     </div>
-    <!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
+  </div>
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
@@ -149,11 +181,9 @@
         </div>
       </div>
     </footer>
-    <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fa fa-angle-up"></i>
     </a>
-    <!-- Logout Modal-->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -178,6 +208,15 @@
     <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
     <script src="js/sb-admin.min.js"></script>
     <script src="js/sb-admin-datatables.min.js"></script>
+    <script type="text/javascript">
+      var year = 1900;
+      var till = 2018;
+      var options = "";
+        for(var y=year; y<=till; y++){
+          options += "<option>"+ y +"</option>";
+          }
+          document.getElementById("year").innerHTML = options;
+    </script>
   </div>
 </body>
 </html>
