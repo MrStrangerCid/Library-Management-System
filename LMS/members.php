@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <?php include_once("connection.php");?>
+  <?php
+  session_start();
+  include_once("connection.php");?>
   <title>Library Management System</title>
   <link rel="Icon" href="vendor/LMS.ico" type="image/x-icon">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">

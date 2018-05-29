@@ -2,6 +2,24 @@
 <html lang="en">
 
 <head>
+  <?php
+    session_start();
+    if(isset($_POST['username']) and isset($_POST['password'])) { 
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $_SESSION['username']=$username;
+
+    $sql = $conn->prepare("SELECT username FROM users WHERE username='$username' and password='$password'");
+
+    if ($conn->query($sql) != 0){
+      echo "<script language='javascript' type='text/javascript'> location.href='index.php'</script>";   
+      }
+      else
+      {
+    echo "<script type='text/javascript'>alert('User Name Or Password Invalid!')</script>";
+    }
+  }
+    ?>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">

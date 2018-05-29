@@ -1,4 +1,6 @@
-<?php include "connection.php";
+<?php 
+session_start();
+ include "connection.php";
   if(isset($_POST['Save'])){
     $isbn=$_POST['txtIsbn'];
     $title=$_POST['txtTitle'];

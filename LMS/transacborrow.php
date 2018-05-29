@@ -107,15 +107,15 @@
               </div>
           </div>
           <div class="form-group row">
-            <label class="col-2 col-form-label">Title</label>
+            <label class="col-2 col-form-label">ISBN</label>
               <div class="col-8">
-                <input class="form-control" type="text" placeholder="ex. Introduction to LMS" name="txtTitle" required>
+                <input class="form-control" type="text" name="txtIsbn" required>
               </div>
           </div>
           <div class="form-group row">
-            <label class="col-2 col-form-label">Author</label>
+            <label class="col-2 col-form-label">Copy Number</label>
               <div class="col-8">
-                <input class="form-control" type="text" placeholder="ex. John Doe" name="txtAuthor" required>
+                <input class="form-control" type="text" name="txtCopy" required>
               </div>
           </div>
           <div class="form-group row">

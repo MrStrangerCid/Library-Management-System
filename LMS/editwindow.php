@@ -95,6 +95,7 @@
           <i class="fa fa-plus"></i> Edit Book</div>
         <form method = "POST">
           <?php
+          session_start();
           include_once('connection.php');
           if(isset($_POST['Save'])){
             $xid =$_GET['xid'];

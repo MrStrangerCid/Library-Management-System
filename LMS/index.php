@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <?php
+  session_start();
+  ?>
   <title>Library Management System</title>
   <link rel="Icon" href="vendor/LMS.ico" type="image/x-icon">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
