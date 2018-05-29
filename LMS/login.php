@@ -8,6 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <title>LMS</title>
+  <link rel="Icon" href="vendor/LMS.ico" type="image/x-icon">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <link href="css/sb-admin.css" rel="stylesheet">
@@ -18,7 +19,7 @@
     <div class="card card-login mx-auto mt-5">
       <div class="card-header">Login</div>
       <div class="card-body">
-        <form>
+        <form method = "POST">
           <div class="form-group">
             <label for="exampleInputEmail1">Username</label>
             <input class="form-control" type="text" placeholder="Enter username" autofocus>

@@ -8,19 +8,20 @@
     $password=$_POST['txtPassword'];
     $fname=$_POST['txtFname'];
     $lname=$_POST['txtLname'];
-    $rs=$dbConn->prepare("SELECT * FROM users WHERE username='$username'");
+    $rs=$conn->prepare("SELECT * FROM users WHERE username='$username'");
     $rs->execute();
     $rc=$rs->rowCount();
     if($rc>0 && $isbn!=""){
       echo "<script> alert('Duplicate Username! Please retype')</script>";
     }else{
-      $dbConn->exec("INSERT INTO users Values ('$username', '$password', '$fname', '$lname')");
+      $conn->exec("INSERT INTO users Values ('$username', '$password', '$fname', '$lname')");
         echo "<script>alert('Sucessfully Registered!')</script>";
         echo "<script>window.location= 'login.php'</script>";
     }
   }
 ?>
   <title>LMS</title>
+  <link rel="Icon" href="vendor/LMS.ico" type="image/x-icon">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
