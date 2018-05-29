@@ -46,7 +46,7 @@
           </a>
           <ul class="sidenav-second-level collapse" id="transactionComponents">
             <li>
-              <a href="borrowbook.php"><i class="fa fa-fw fa-shopping-basket"></i> Borrow Books</a>
+              <a href="transacborrow.php"><i class="fa fa-fw fa-shopping-basket"></i> Borrow Books</a>
             </li>
             <li>
               <a href="#"><i class="fa fa-fw fa-tags"></i> Return Book</a>
@@ -134,7 +134,7 @@
                   <td><?php echo $rec['publisher']?></td>
                   <td><?php echo $rec['copyright_year']?></td>
                   <td><?php echo $rec['status']?></td>
-                  <td><a href = "editwindow.php?xid=<?php echo $rec['bookID'];?>">Edit</a></td>
+                  <td><center><a href = "editwindow.php?xid=<?php echo $rec['bookID'];?>" class = "btn btn-primary">Edit</a></center></td>
                 </tr>
                 <?php
               }

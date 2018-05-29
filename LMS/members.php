@@ -47,7 +47,7 @@
           </a>
           <ul class="sidenav-second-level collapse" id="transactionComponents">
             <li>
-              <a href="#"><i class="fa fa-fw fa-shopping-basket"></i> Borrow Books</a>
+              <a href="transacborrow.php"><i class="fa fa-fw fa-shopping-basket"></i> Borrow Books</a>
             </li>
             <li>
               <a href="#"><i class="fa fa-fw fa-tags"></i> Return Book</a>
@@ -106,7 +106,7 @@
                   <th>Address</th>
                   <th>Position</th>
                   <th>Contact</th>
-                  <th>Status></th>
+                  <th>Status</th>
                 </tr>
               </thead>
               <tfoot>
@@ -124,7 +124,7 @@
               <tbody>
                 <?php
                    $sql = "select * from members";
-                     foreach ($dbConn->query($sql) as $rec){
+                     foreach ($conn->query($sql) as $rec){
                 ?>
                 <tr>
                   <td><?php echo $rec['memberID']?></td>

@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <php include="addrec.php";?>
-  <php include="delete.php";?>
-  <php include="connection.php";?>
   <title>Library Management System</title>
+  <link rel="Icon" href="vendor/LMS.ico" type="image/x-icon">
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
   <link href="css/sb-admin.css" rel="stylesheet">
 </head>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-  <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <a class="navbar-brand" href="index.html">Library Management System</a>
     <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -49,7 +46,7 @@
           </a>
           <ul class="sidenav-second-level collapse" id="transactionComponents">
             <li>
-              <a href="#"><i class="fa fa-fw fa-shopping-basket"></i> Borrow Books</a>
+              <a href="transacborrow.php"><i class="fa fa-fw fa-shopping-basket"></i> Borrow Books</a>
             </li>
             <li>
               <a href="#"><i class="fa fa-fw fa-tags"></i> Return Book</a>
@@ -66,7 +63,7 @@
               <a href="#"><i class="fa fa-fw fa-vcard-o"></i> Membership</a>
             </li>
             <li>
-              <a href="#"><i class="fa fa-fw fa-sitemap"></i> View Members</a>
+              <a href="members.php"><i class="fa fa-fw fa-sitemap"></i> View Members</a>
             </li>
           </ul>
         </li>
@@ -89,12 +86,55 @@
     <div class="container-fluid">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="#">Index</a>
+          <a>Transaction</a>
         </li>
-        <li class="breadcrumb-item active">Charts</li>
+        <li class="breadcrumb-item active">Borrow Book</li>
       </ol>
-    <!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-plus"></i> Borrow</div>
+        <form method = "POST">
+          <?php
+          $today = date("Y-m-d");
+          $plus = strtotime("+14 day", time());
+          $estimate = date('Y-m-d', $plus);
+          ?>
+        <div class="card-body">
+          <div class="form-group row">
+            <label class="col-2 col-form-label">Issue ID</label>
+              <div class="col-3">
+                <input class="form-control" type="number" name="txtIssue" required>
+              </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-2 col-form-label">Title</label>
+              <div class="col-8">
+                <input class="form-control" type="text" placeholder="ex. Introduction to LMS" name="txtTitle" required>
+              </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-2 col-form-label">Author</label>
+              <div class="col-8">
+                <input class="form-control" type="text" placeholder="ex. John Doe" name="txtAuthor" required>
+              </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-2 col-form-label">Check-out Date</label>
+              <div class="col-8">
+                <?php echo $today?>
+              </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-2 col-form-label">Estimated Return Date</label>
+              <div class="col-8">
+                <?php echo $estimate?>
+              </div>
+            <td><input type="submit" class="btn btn-success btn-block" name="Save" value="Save"></td>
+        </div>
+      </div>
+    </form>
+    </div>
+  </div>
     <footer class="sticky-footer">
       <div class="container">
         <div class="text-center">
@@ -102,11 +142,9 @@
         </div>
       </div>
     </footer>
-    <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fa fa-angle-up"></i>
     </a>
-    <!-- Logout Modal-->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -119,7 +157,7 @@
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
+            <a class="btn btn-primary" href="login.php">Logout</a>
           </div>
         </div>
       </div>
@@ -133,5 +171,4 @@
     <script src="js/sb-admin-datatables.min.js"></script>
   </div>
 </body>
-
 </html>

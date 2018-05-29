@@ -46,7 +46,7 @@
           </a>
           <ul class="sidenav-second-level collapse" id="transactionComponents">
             <li>
-              <a href="#"><i class="fa fa-fw fa-shopping-basket"></i> Borrow Books</a>
+              <a href="transacborrow.php"><i class="fa fa-fw fa-shopping-basket"></i> Borrow Books</a>
             </li>
             <li>
               <a href="#"><i class="fa fa-fw fa-tags"></i> Return Book</a>
